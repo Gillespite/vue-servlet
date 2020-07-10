@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Vue+servlet测试</title>
+</head>
+<body>
+<div id="app">
+    <input type="button" value="登陆" @click="gologin()">
+    <input type="button" value="注册" @click="goreg()">
+    <input type="button" value="关于" @click="goworld()">
+</div>
+
+
+<script src="js/vue.min.js"></script>
+<script src="js/vue-resource.min.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+        },
+        methods: {
+            gologin: function () {
+                location.href="login.html";
+            },
+            goreg: function () {
+                location.href="reg.html";
+            },
+            goworld: function () {
+                location.href="world.html";
+            },
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Vue+servlet测试</title>
+</head>
+<body>
+<div id="app">
+    <h1>现在的日期是7月{{now}}日</h1><br/>
+    <input type="button" value="修改时间" @click="gotimefix()">
+</div>
+
+
+<script src="js/vue.min.js"></script>
+<script src="js/vue-resource.min.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            now:''
+        },
+        created: function () {
+            this.temp=0;
+            this.$http.get('http://localhost:8080/getnow', {
+                params: {
+                }
+            }).then(function (data) {
+                if (data.data.ok == -1) {
+                    alert("获取时间失败");
+                } else {
+                    this.now = data.data.msg;
+                }
+            }, function () {
+                console.log('传输失败');
+            });
+        },
+        methods: {
+            gotimefix: function () {
+                location.href="timefix.html";
+            }
+        }
+    })
+</script>
+</body>
+</html>

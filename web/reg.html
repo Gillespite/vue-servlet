@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Vue+servlet测试</title>
+</head>
+<body>
+
+<script src="https://cdn.bootcdn.net/ajax/libs/vue/1.0.27/vue.js"></script>
+<script src="js/vue-resource.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/vue-router/0.7.13/vue-router.js"></script>
+
+<div id="app">
+    <h2>注册</h2>
+    姓名：<input type="text" v-model="name"><br>
+    密码：<input type="password" v-model="password"><br>
+    地址：<input type="text" v-model="loc"><br>
+    电话：<input type="text" v-model="tel"><br>
+    工资：<input type="text" v-model="pay"><br>
+    职称：
+    <div id="choose">
+        <select v-model="pro">
+            <option disabled value="">请选择</option>
+            <option>助教</option>
+            <option>讲师</option>
+            <option>副教授</option>
+            <option>教授</option>
+        </select>
+        <span>您选择了 {{ pro }}</span>
+    </div>
+    是否为管理员：<input type="checkbox" id ="checkbox" v-model="is">
+    <label for="checkbox">{{saysome}}</label><br>
+    <input type="button" value="注册" @click="reg()">
+</div>
+
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            name:'',
+            password:'',
+            loc:'',
+            tel:'',
+            pay:'',
+            pro:'',
+            isadmin:'',
+
+            is:'',
+            saysome:'您默认为普通员工',
+            level:''
+        },
+        watch: {
+            is(val) {
+                if (this.is){
+                    this.saysome = "您选择了成为管理员";
+                }else{
+                    this.saysome = "您当前不是管理员";
+                }
+            }
+        },
+        methods: {
+            reg: function () {
+
+                if(this.is){
+                    this.isadmin=1;
+                }else{
+                    this.isadmin=0;
+                }
+                this.$http.get('http://localhost:8080/reg', {
+                    params: {
+                        name : this.name,
+                        password : this.password,
+                        loc : this.loc,
+                        tel : this.tel,
+                        pay : this.pay,
+                        pro : this.pro,
+                        isadmin : this.isadmin
+                    }
+                }).then(function (data) {
+                    if (data.data.ok != 1) {//失败时
+                        alert("注册失败");
+                    } else {
+                        alert("注册成功，您的编号是"+data.data.msg+",这是您登陆本网站的唯一凭证，请妥善保管");
+                        var url = "login.html";
+                        location.href=url;
+                    }
+                }, function () {
+                    console.log('传输失败');
+                });
+            }
+        }
+    })
+</script>
+</body>
+</html>

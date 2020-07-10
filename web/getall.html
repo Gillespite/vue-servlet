@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>test</title>
+	
+	<!-- base:css -->
+	<link rel="stylesheet" href="assets/vendors/mdi/css/materialdesignicons.min.css">
+	<link rel="stylesheet" href="assets/vendors/css/vendor.bundle.base.css">
+	<link rel="stylesheet" href="assets/css/style.css">
+	<!-- endinject -->
+	<script src="assets/vendors/js/vendor.bundle.base.js"></script>
+	<script src="assets/vendors/chart.js/Chart.min.js"></script>
+	<script src="assets/js/off-canvas.js"></script>
+	<script src="assets/js/hoverable-collapse.js"></script>
+	<script src="assets/js/template.js"></script>
+	<script src="assets/js/dashboard.js"></script>
+</head>
+<body>
+	<div id="app">
+    <div class="container-scroller d-flex">
+		<!-- partial -->
+		<div class="container-fluid page-body-wrapper">
+			<!-- partial:./partials/_navbar.html -->
+			<nav class="navbar col-lg-12 col-12 px-0 py-0 py-lg-4 d-flex flex-row">
+				<div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+					<h2 class="font-weight-bold mb-0 d-none d-md-block mt-1">XX高校人力资源管理系统</h2>
+					<ul class="navbar-nav navbar-nav-right">
+					</ul>
+					<button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
+						data-toggle="offcanvas">
+						<span class="mdi mdi-menu"></span>
+					</button>
+				</div>
+			</nav>
+			<!-- partial -->
+
+			<div class="main-panel">
+				<div class="content-wrapper">
+					<!--元素在这里开始-->
+					<div class="row">
+						<div class="col-lg-12 grid-margin stretch-card">
+							<div class="card">
+								<div class="card-body">
+									<h4 class="card-title">我的员工</h4>
+									<div class="table-responsive">
+										<table class="table table-striped">
+											<thead>
+												<tr>
+													<th>
+														头像
+													</th>
+													<th>
+														编号
+													</th>
+													<th>
+														姓名
+													</th>
+													<th>
+														地址
+													</th>
+													<th>
+														电话
+													</th>
+													<th>
+														工资
+													</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr v-for="(user,i) in list">
+													<td class="py-1">
+														<img src="assets/images/faces/face1.jpg" alt="image" />
+                                                    </td>
+
+													<td>
+														{{user.id}}
+													</td>
+													<td>
+														{{user.name}}
+													</td>
+													<td>
+														{{user.loc}}
+													</td>
+													<td>
+														{{user.tel}}
+													</td>
+													<td>
+														{{user.pay}}
+													</td>
+
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+    </div>
+
+
+<script src="js/vue.min.js"></script>
+<script src="js/vue-resource.min.js"></script>
+
+
+<script>
+    new Vue({
+        //<p v-for="(user,i) in list">{{user.id}}{{user.name}}{{user.loc}}{{user.tel}}{{user.pay}}</p>
+        el: '#app',
+        data: {
+            list:''
+        },
+        created: function () {
+            this.$http.get('http://localhost:8080/getall', {
+                params: {
+                }
+            }).then(function (data) {
+                if (data.data.ok != 1) {
+                    alert("找不到该员工");
+                } else {
+                    //console.log(data.data.msg);
+                    var mydata = JSON.parse(data.data.msg);
+                    console.log(mydata[0].name);
+                    console.log(mydata);
+                    this.list=mydata;
+                }
+            }, function () {
+                console.log('传输失败');
+            });
+        },
+        methods: {
+            gofix: function () {
+                var getid = this.id;
+                var url = "fix.html?"  + "id=" + getid;
+                location.href=url;
+            },
+            goday: function () {
+                var getid = this.id;
+                var url = "dayevent.html?"  + "id=" + getid;
+                location.href=url;
+            },
+            gowant: function () {
+                var getid = this.id;
+                var url = "want.html?"  + "id=" + getid;
+                location.href=url;
+            },
+        }
+    })
+</script>
+</body>
+</html>

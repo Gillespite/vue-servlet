@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Vue+servlet测试</title>
+</head>
+<body>
+<div id="app">
+    <h1>正在修改时间</h1><br/>
+    <input type="button" value="前进一天" @click="dayadd()">
+</div>
+
+
+<script src="js/vue.min.js"></script>
+<script src="js/vue-resource.min.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+        },
+        methods: {
+            dayadd: function () {
+                this.$http.get('http://localhost:8080/timefix', {
+                    params: {
+                    }
+                }).then(function (data) {
+                    if (data.data.ok != 1) {
+                        alert("获取时间失败");
+                    } else {
+                        alert("修改时间成功");
+                    }
+                }, function () {
+                    console.log('传输失败');
+                });
+                location.href="world.html";
+            }
+        }
+    })
+</script>
+</body>
+</html>

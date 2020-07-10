@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>mypage</title>
+</head>
+<body>
+<div id="app">
+    <!--无主题-->
+    员工你好!,你的个人信息如下<br/>
+    编号：{{id}}<br/>
+    姓名：{{name}}<br/>
+    密码：{{password}}<br/>
+    地址：{{loc}}<br/>
+    电话：{{tel}}<br/>
+    工资：{{pay}}<br/>
+    职称：{{pro}}<br/>
+    是否为管理员：{{isadmin}}<br/>
+    <input type="button" value="修改个人信息" @click="gofix()"><br/>
+    <input type="button" value="打卡" @click="goday()"><br/>
+    <input type="button" value="申请" @click="gowant()"><br/>
+</div>
+
+
+<script src="js/vue.min.js"></script>
+<script src="js/vue-resource.min.js"></script>
+
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            id: '',
+            name: '',
+            password: '',
+            loc: '',
+            tel: '',
+            pay: '',
+            pro: '',
+            isadmin: ''
+        },
+        created: function () {
+            var thisURL = document.URL;
+            var getval = thisURL.split('?')[1];
+            var showval = getval.split("=")[1];
+            console.log(showval)
+            this.$http.get('http://localhost:8080/getdetail', {
+                params: {
+                    id: showval,
+                }
+            }).then(function (data) {
+                if (data.data.ok != 1) {
+                    alert("找不到该员工");
+                } else {
+                    var mydata = JSON.parse(data.data.msg);
+                    this.id = mydata.id;
+                    this.name = mydata.name;
+                    this.password = mydata.password;
+                    this.loc = mydata.loc;
+                    this.tel = mydata.tel;
+                    this.pay = mydata.pay;
+                    this.pro = mydata.pro;
+                    this.isadmin = mydata.isadmin;
+                }
+            }, function () {
+                console.log('传输失败');
+            });
+            this.name = showval;
+        },
+        methods: {
+            gofix: function () {
+                var getid = this.id;
+                var url = "fix.html?"  + "id=" + getid;
+                location.href=url;
+            },
+            goday: function () {
+                var getid = this.id;
+                var url = "dayevent.html?"  + "id=" + getid;
+                location.href=url;
+            },
+            gowant: function () {
+                var getid = this.id;
+                var url = "want.html?"  + "id=" + getid;
+                location.href=url;
+            },
+        }
+    })
+</script>
+</body>
+</html>

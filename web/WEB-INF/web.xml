@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0">
+    <servlet>
+        <servlet-name>reg</servlet-name>
+        <servlet-class>servlet.reg</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>reg</servlet-name>
+        <url-pattern>/reg</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>getdetail</servlet-name>
+        <servlet-class>servlet.getdetail</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>getdetail</servlet-name>
+        <url-pattern>/getdetail</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>fix</servlet-name>
+        <servlet-class>servlet.fix</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>fix</servlet-name>
+        <url-pattern>/fix</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>getnow</servlet-name>
+        <servlet-class>servlet.getnow</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>getnow</servlet-name>
+        <url-pattern>/getnow</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>timefix</servlet-name>
+        <servlet-class>servlet.timefix</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>timefix</servlet-name>
+        <url-pattern>/timefix</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>dayevent</servlet-name>
+        <servlet-class>servlet.dayevent</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>dayevent</servlet-name>
+        <url-pattern>/dayevent</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>isover</servlet-name>
+        <servlet-class>servlet.isover</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>isover</servlet-name>
+        <url-pattern>/isover</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>wantfix</servlet-name>
+        <servlet-class>servlet.wantfix</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>wantfix</servlet-name>
+        <url-pattern>/wantfix</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>getall</servlet-name>
+        <servlet-class>servlet.getall</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>getall</servlet-name>
+        <url-pattern>/getall</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>getdayeventresult</servlet-name>
+        <servlet-class>servlet.getdayeventresult</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>getdayeventresult</servlet-name>
+        <url-pattern>/getdayeventresult</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>go</servlet-name>
+        <servlet-class>servlet.go</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>go</servlet-name>
+        <url-pattern>/go</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>search</servlet-name>
+        <servlet-class>servlet.search</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>search</servlet-name>
+        <url-pattern>/search</url-pattern>
+    </servlet-mapping>
+</web-app>

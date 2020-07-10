@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>mypage</title>
+</head>
+<body>
+<div id="app">
+    <!--无主题-->
+    <h3>今天员工的打卡率为</h3>
+    <h3>{{temp}}</h3><br/>
+</div>
+
+
+<script src="js/vue.min.js"></script>
+<script src="js/vue-resource.min.js"></script>
+
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            temp: '',
+        },
+        created: function () {
+            //获取当前时间
+            var temp=0.1;
+            this.$http.get('http://localhost:8080/getdayeventresult', {
+                params: {}
+            }).then(function (data) {
+                if (data.data.ok == -1) {
+                    //alert("获取时间失败");
+                } else {
+                    temp=data.data.msg;
+                    this.temp=temp;
+                }
+                console.log('finish1');
+            }, function () {
+                console.log('传输失败');
+            });
+            //获取当前人的姓名
+        },
+        methods: {
+        }
+    })
+</script>
+</body>
+</html>

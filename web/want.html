@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Vue+servlet测试</title>
+</head>
+<body>
+<div id="app">
+    <input type="button" value="申请加薪" @click="wantmoney()">
+    <input type="button" value="申请离职" @click="wantquit()">
+    <input type="button" value="申请升职" @click="wantup()">
+</div>
+
+
+<script src="js/vue.min.js"></script>
+<script src="js/vue-resource.min.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+        },
+        methods: {
+            wantmoney: function () {
+                var thisURL = document.URL;
+                var getval = thisURL.split('?')[1];
+                var showval = getval.split("=")[1];
+                console.log(showval)
+                var getid = this.id;
+                var url = "wantmoney.html?"  + "id=" + showval;
+                location.href=url;
+            },
+            wantquit: function () {
+                var thisURL = document.URL;
+                var getval = thisURL.split('?')[1];
+                var showval = getval.split("=")[1];
+                console.log(showval)
+                var getid = this.id;
+                var url = "wantquit.html?"  + "id=" + showval;
+                location.href=url;
+            },
+            wantup: function () {
+                var thisURL = document.URL;
+                var getval = thisURL.split('?')[1];
+                var showval = getval.split("=")[1];
+                console.log(showval)
+                var getid = this.id;
+                var url = "wantup.html?"  + "id=" + showval;
+                location.href=url;
+            },
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Vue+servlet测试</title>
+</head>
+<body>
+
+<script src="https://cdn.bootcdn.net/ajax/libs/vue/1.0.27/vue.js"></script>
+<script src="js/vue-resource.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/vue-router/0.7.13/vue-router.js"></script>
+
+<div id="app">
+    <h2>登陆</h2>
+    账号：<input type="text" v-model="id"><br>
+    密码：<input type="password" v-model="password"><br>
+    <input type="button" value="登陆" @click="login()">
+</div>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            id:'',
+            password:''
+        },
+        methods: {
+            login: function () {
+                this.$http.get('http://localhost:8080/getdetail', {
+                    params: {
+                        id: this.id,
+                    }
+                }).then(function (data) {
+                    var mydata = JSON.parse(data.data.msg);
+                    if (this.password != mydata.password) {//失败时
+                        alert("登陆失败");
+                    } else {
+                        if(mydata.isadmin==0){
+                            alert("登陆成功,员工你好");
+                            var getid = this.id;
+                            var url = "me.html?"  + "id=" + getid;
+                            location.href=url;
+                        }else if(mydata.isadmin==1){
+                            alert("登陆成功,管理员你好");
+                            var getid = this.id;
+                            var url = "admin.html?"  + "id=" + getid;
+                            location.href=url;
+                        }else{
+                            alert("您已离职");
+                        }
+                    }
+                }, function () {
+                    console.log('传输失败');
+                });
+            }
+        }
+    })
+</script>
+</body>
+</html>
