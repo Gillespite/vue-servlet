@@ -1,5 +1,6 @@
 # vue-servlet
 前端vue 后端servlet 数据库jdbc 的混搭 
+
 没有上过web课程 但是学校的实训课要求做web项目 讲的是jsp+servlet 搜了一下jsp的相关资料 发现好多都是在劝退jsp的 所以打算前端用vue做 后端用servlet 前后端交互用vue-resource这个插件 (借鉴了https://blog.csdn.net/cnds123321/article/details/103995065 ) 不过后来发现这个插件官方已经不推荐使用了 官方现在推荐的是axios **vue-resource貌似只支持低版本vue,如果你要使用高版本vue的特性 请提前测试** 但是当时没时间改了 所以就这么用下来了
 
 ## 免责提醒
